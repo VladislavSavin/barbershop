@@ -1,0 +1,600 @@
+/* ============================================
+СТРАНИЦА: ЛИЧНЫЙ КАБИНЕТ КЛИЕНТА
+Файл: template/pages/profile/style.css
+============================================ */
+
+/* --------------------------------------------
+1. ОБЩИЕ СТИЛИ И СЕТКА
+-------------------------------------------- */
+.profile-container {
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+}
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Уведомления (Успех / Ошибка) */
+.profile-alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.profile-alert.alert-success {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.profile-alert.alert-error {
+    background: rgba(255, 68, 68, 0.1);
+    color: #ff4444;
+    border: 1px solid rgba(255, 68, 68, 0.2);
+}
+
+/* --------------------------------------------
+2. ЛЕВЫЙ САЙДБАР (КАРТОЧКА ПОЛЬЗОВАТЕЛЯ)
+-------------------------------------------- */
+.user-sidebar {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    position: sticky;
+    top: 2rem;
+}
+
+.user-avatar-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(200, 122, 78, 0.1);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    font-size: 3rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+}
+
+.user-name-large {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+}
+
+.user-phone {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+/* Блок email */
+.user-email-block {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.user-email {
+    color: var(--text-main);
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.user-email-empty {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    font-style: italic;
+}
+
+.btn-edit-email {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: block;
+}
+
+.btn-edit-email:hover {
+    background: var(--accent-color);
+    color: var(--bg-main);
+}
+
+/* Форма email (скрыта по умолчанию) */
+.email-form {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.email-input {
+    width: 100%;
+    padding: 0.7rem;
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s;
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.email-form-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-save-email {
+    flex: 1;
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-save-email:hover {
+    background: #fff;
+}
+
+.btn-cancel-email {
+    flex: 1;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel-email:hover {
+    color: var(--text-main);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Статистика */
+.user-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-box {
+    background: #111;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-val {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    margin-bottom: 0.2rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-logout-profile {
+    display: block;
+    margin-top: 2rem;
+    color: #ff4444;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.btn-logout-profile:hover {
+    color: #fff;
+}
+
+/* --------------------------------------------
+3. ПРАВАЯ ЧАСТЬ (ТАБЫ И ЗАПИСИ)
+-------------------------------------------- */
+.profile-main {
+    min-width: 0;
+}
+
+.profile-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.tab-btn:hover {
+    color: #fff;
+}
+
+.tab-btn.active {
+    color: var(--accent-color);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+}
+
+/* Контент табов */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeInProfile 0.3s ease;
+}
+
+@keyframes fadeInProfile {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Карточки записей */
+.booking-card-profile {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    transition: border-color 0.3s;
+}
+
+.booking-card-profile:hover {
+    border-color: rgba(200, 122, 78, 0.3);
+}
+
+.booking-card-profile.is-past {
+    opacity: 0.6;
+}
+
+.bc-info h3 {
+    color: var(--text-main);
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.bc-info .master-name {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.bc-info .datetime {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.datetime-muted {
+    color: var(--text-muted) !important;
+}
+
+.bc-actions {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.bc-price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.bc-price-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Статусы */
+.status-badge-p {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid transparent;
+}
+
+.status-pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+.status-confirmed {
+    background: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+    border-color: rgba(0, 123, 255, 0.3);
+}
+
+.status-completed {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border-color: rgba(40, 167, 69, 0.3);
+}
+
+.status-cancelled {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border-color: rgba(220, 53, 69, 0.3);
+}
+
+/* Кнопки */
+.btn-cancel {
+    background: transparent;
+    border: 1px solid #ff4444;
+    color: #ff4444;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+
+.btn-cancel:hover {
+    background: #ff4444;
+    color: #fff;
+}
+
+.btn-repeat {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-repeat:hover {
+    background: var(--accent-color);
+    color: #000;
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 3rem;
+    background: var(--bg-surface);
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.empty-btn {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* --------------------------------------------
+4. БЛОК СЕРТИФИКАТОВ
+-------------------------------------------- */
+.profile-certs-block {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-certs-title {
+    color: var(--text-main);
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+}
+
+.profile-certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.profile-cert-card {
+    background: linear-gradient(135deg, rgba(200, 122, 78, 0.15) 0%, rgba(200, 122, 78, 0.03) 100%);
+    border: 1px dashed var(--accent-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-cert-card::after {
+    content: '';
+    position: absolute;
+    right: -30px;
+    bottom: -30px;
+    width: 100px;
+    height: 100px;
+    background: rgba(200, 122, 78, 0.05);
+    border-radius: 50%;
+}
+
+.pc-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pc-nominal {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-color);
+}
+
+.pc-badge {
+    font-size: 0.7rem;
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.pc-code {
+    font-family: 'Courier New', monospace;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.pc-balance {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+}
+
+.pc-balance strong {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+/* --------------------------------------------
+5. АДАПТИВ
+-------------------------------------------- */
+@media (max-width: 900px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .user-sidebar {
+        position: static;
+    }
+
+    .user-stats {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .booking-card-profile {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Делаем блок с инфо на всю ширину */
+    .bc-info {
+        width: 100%;
+    }
+
+    /* Блок с действиями (цена, статус, кнопка) */
+    .bc-actions {
+        display: flex;
+        flex-wrap: wrap; /* Разрешаем перенос, если не влезет */
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 10px;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        /* Добавляем разделительную линию для красоты */
+        border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    /* Цена: запрещаем сжимать и переносить текст */
+    .bc-price {
+        white-space: nowrap;
+        flex-shrink: 0;
+        font-size: 1.1rem;
+    }
+
+    /* Статус: запрещаем сжимать */
+    .status-badge-p {
+        flex-shrink: 0;
+        font-size: 0.7rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    /* Кнопка: запрещаем сжимать */
+    .bc-actions form {
+        flex-shrink: 0;
+    }
+
+    .btn-cancel {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+}

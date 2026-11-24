@@ -1,0 +1,112 @@
+/* ============================================
+СТРАНИЦА УСПЕШНОЙ ЗАПИСИ
+============================================ */
+
+.success-card {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(200, 122, 78, 0.1);
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+}
+
+.success-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+.success-title {
+    color: var(--text-main);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.success-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+}
+
+/* Чек с деталями записи */
+.receipt {
+    background: #111;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+.receipt-row strong {
+    color: var(--text-main);
+}
+
+.receipt-row:last-child {
+    border-bottom: none;
+}
+
+.receipt-row.total {
+    margin-top: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.2rem;
+}
+
+.receipt-row.total strong {
+    color: var(--accent-color);
+}
+
+/* Кнопка возврата */
+.btn-home {
+    display: inline-block;
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+    background: var(--accent-color);
+    color: var(--bg-main);
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 480px) {
+    .success-card {
+        padding: 2rem 1rem;
+    }
+
+    .success-title {
+        font-size: 1.5rem;
+    }
+
+    .receipt-row {
+        font-size: 0.9rem;
+    }
+}

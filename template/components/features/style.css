@@ -1,0 +1,102 @@
+/* ============================================
+КОМПОНЕНТ: ПРЕИМУЩЕСТВА
+============================================ */
+
+.features-block {
+    margin: 5rem 0;
+}
+
+.features-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.features-header .section-title {
+    color: var(--text-main);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.features-header .section-subtitle {
+    color: var(--accent-color);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Сетка карточек */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+/* Карточка преимущества */
+.feature-card {
+    background: var(--bg-surface);
+    padding: 2.5rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Иконка */
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(200, 122, 78, 0.1);
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    background: var(--accent-color);
+    color: var(--bg-main);
+}
+
+.feature-title {
+    color: var(--text-main);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.feature-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ============================================
+АДАПТИВ
+============================================ */
+@media (max-width: 992px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах */
+    }
+}
+
+@media (max-width: 576px) {
+    .features-grid {
+        grid-template-columns: 1fr; /* 1 колонка на телефонах */
+    }
+
+    .features-block {
+        margin: 3rem 0;
+    }
+}

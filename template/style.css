@@ -1,0 +1,215 @@
+/* ============================================
+ГЛОБАЛЬНЫЕ СТИЛИ И СБРОС
+============================================ */
+:root {
+    /* --- НАСТРОЙКИ ЦВЕТА --- */
+    --accent-color: #c87a4e; /* Медный/Терракотовый */
+    --bg-main: #1e1e1e;      /* Чуть светлее основного фона (графит) */
+    --bg-surface: #262626;   /* Фон шапки и подвала (еще светлее) */
+    --text-main: #f0f0f0;    /* Мягкий белый (не режет глаз) */
+    --text-muted: #999999;   /* Светло-серый для второстепенного текста */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* Главный контейнер для контента */
+.site-main {
+    flex: 1;
+    padding: 2rem 0 4rem 0;
+}
+
+/* ============================================
+ШАПКА САЙТА (HEADER)
+============================================ */
+.site-header {
+    background: var(--bg-surface);
+    border-bottom: 2px solid var(--accent-color);
+    padding: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Сетка: 1 часть слева, авто по центру, 1 часть справа */
+.header-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- Левый блок --- */
+.header-left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.site-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+/* --- Центральный блок (Меню) --- */
+.header-center {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.header-center a {
+    position: relative;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    display: inline-block; /* Обязательно для плавного увеличения */
+
+    /* Плавный переход для всех свойств (цвет, размер, свечение) */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.header-center a:hover {
+    color: var(--accent-color);
+
+    /* Увеличение текста на 10% */
+    transform: scale(1.02);
+
+    /* Медное свечение вокруг текста */
+    text-shadow: 0 0 5px rgba(200, 122, 78, 0.6);
+}
+
+
+/* --- Правый блок (Кнопки) --- */
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Стильная кнопка "Войти" / "Профиль" */
+.nav-btn {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: var(--accent-color);
+    color: var(--bg-main); /* Текст становится темным на фоне меди */
+}
+
+/* Ссылка "Выйти" */
+.nav-muted {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.nav-muted:hover {
+    color: #ff4444; /* Красный при наведении */
+}
+
+/* ============================================
+ПОДВАЛ САЙТА (FOOTER)
+============================================ */
+.site-footer {
+    background: var(--bg-surface);
+    text-align: center;
+    padding: 1.5rem 0;
+    border-top: 1px solid #3a3a3a; /* Чуть светлее граница */
+}
+
+.site-footer p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Контейнер для ссылок пользователя */
+.user-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* Кнопка админки (залитая) */
+.nav-btn--admin {
+    background: var(--accent-color);
+    color: var(--bg-main) !important;
+}
+
+.nav-btn--admin:hover {
+    background: transparent;
+    color: var(--accent-color) !important;
+}
+
+/* ============================================
+АДАПТИВ ДЛЯ МОБИЛЬНЫХ
+============================================ */
+@media (max-width: 768px) {
+    /* Скрываем десктопное меню и кнопки авторизации */
+    .header-center,
+    .header-right {
+        display: none;
+    }
+
+    .site-logo{
+        font-size: 15px;
+    }
+
+    .header-top {
+        padding: 15px 20px;
+        justify-content: space-between; /* Логотип слева, бургер справа */
+    }
+
+    .headerUp {
+        font-size: 20px;
+        text-align: left;
+    }
+
+    /* Включаем бургер (он у нас прописан в burger_menu.css) */
+    .burger-btn {
+        display: block;
+    }
+
+    .user-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .user-nav .nav-btn {
+        width: 100%;
+        text-align: center;
+    }
+}

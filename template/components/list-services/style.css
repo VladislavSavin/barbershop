@@ -1,0 +1,175 @@
+/* ============================================
+КОМПОНЕНТ: СЕТКА ПОПУЛЯРНЫХ УСЛУГ
+============================================ */
+
+.services-block {
+    margin-bottom: 5rem;
+    margin-top: 2rem;
+}
+
+.services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.view-all-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.view-all-link:hover {
+    color: #fff;
+}
+
+/* Сетка: 2 колонки на ПК */
+.services-horizontal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* Карточка (горизонтальная) */
+.service-row-card {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Медная полоска слева, которая появляется при наведении */
+.service-row-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent-color);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.service-row-card:hover {
+    transform: translateX(4px);
+    border-color: rgba(200, 122, 78, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-row-card:hover::before {
+    transform: scaleY(1); /* Полоска выезжает */
+}
+
+.service-row-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.service-row-card__category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.service-row-card__name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.service-row-card__time {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+.service-row-card__action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+}
+
+.service-row-card__price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    white-space: nowrap;
+}
+
+.service-row-card__price small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.service-row-card__btn {
+    background: transparent;
+    color: var(--text-main);
+    text-decoration: none;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.service-row-card:hover .service-row-card__btn {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--bg-main);
+}
+
+/* ============================================
+АДАПТИВ
+============================================ */
+@media (max-width: 900px) {
+    .services-horizontal-grid {
+        grid-template-columns: 1fr; /* На планшетах и мобилках в одну колонку */
+    }
+}
+
+@media (max-width: 480px) {
+    .service-row-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .service-row-card__action {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .services-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

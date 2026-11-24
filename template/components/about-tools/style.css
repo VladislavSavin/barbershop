@@ -1,0 +1,85 @@
+.tools-block {
+    background: var(--bg-surface);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    margin: 6rem 0;
+    border: 1px solid rgba(200, 122, 78, 0.2);
+}
+.tools-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.tools-header .section-title {
+    font-size: 2.2rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+.tools-header .section-subtitle {
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.tool-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+.tool-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+    background: rgba(200, 122, 78, 0.1);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+.tool-text h3 {
+    color: var(--text-main);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.tool-text p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+@media (max-width: 768px) {
+    .tools-block {
+        padding: 2rem 1rem;
+        margin: 3rem 0;
+    }
+
+    .tools-header .section-title {
+        font-size: 1.8rem;
+    }
+
+    /* Ставим карточки друг под другом */
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .tool-item {
+        gap: 1rem; /* Уменьшаем отступ между иконкой и текстом */
+    }
+
+    .tool-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .tool-text h3 {
+        font-size: 1.1rem;
+    }
+}

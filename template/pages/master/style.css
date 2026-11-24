@@ -1,0 +1,293 @@
+/* ============================================
+КАБИНЕТ МАСТЕРА
+Файл: template/pages/master/style.css
+============================================ */
+
+.master-dashboard {
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+    max-width: 900px;
+}
+
+.master-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.master-header h1 {
+    color: var(--text-main);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.master-header p {
+    color: var(--accent-color);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-logout {
+    color: #ff4444;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.btn-logout:hover { color: #fff; }
+
+/* --- Сетка расписания --- */
+.master-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.schedule-group {
+    margin-bottom: 1rem;
+}
+
+.schedule-title {
+    font-size: 1.3rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.schedule-title span {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Цветные маркеры для заголовков */
+.schedule-title::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 24px;
+    border-radius: 4px;
+}
+.schedule-title.today::before { background: #28a745; } /* Зеленый */
+.schedule-title.tomorrow::before { background: #007bff; } /* Синий */
+.schedule-title.future::before { background: #ffc107; } /* Желтый */
+.schedule-title.history::before { background: #666; } /* Серый */
+
+.empty-text {
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 1rem;
+    background: var(--bg-surface);
+    border-radius: 8px;
+    border: 1px dashed rgba(255,255,255,0.1);
+}
+
+/* --- Карточка записи --- */
+.master-booking-card {
+    display: flex;
+    background: var(--bg-surface);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.master-booking-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Выделение для сегодняшних записей */
+.master-booking-card.is-today {
+    border-left: 4px solid #28a745;
+    box-shadow: 0 5px 20px rgba(40, 167, 69, 0.1);
+}
+
+.master-booking-card.is-history {
+    opacity: 0.6;
+}
+
+/* Левая часть: Время */
+.booking-time {
+    padding: 1.5rem;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.time-start {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.time-end {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+.booking-date {
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Центральная часть: Инфо */
+.booking-details {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.booking-details h3 {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.booking-details .client-name {
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.booking-details .client-phone {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.booking-details .client-phone:hover {
+    color: #fff;
+}
+
+/* Правая часть: Статус */
+.booking-status {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 150px;
+}
+
+.status-form select {
+    padding: 0.6rem;
+    background: #111;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+}
+
+.status-badge {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-badge.cancelled { color: #ff4444; }
+.status-badge.completed { color: #28a745; }
+
+/* --- Адаптив --- */
+@media (max-width: 768px) {
+    .master-booking-card {
+        flex-direction: column;
+    }
+
+    .booking-time {
+        flex-direction: row;
+        gap: 10px;
+        padding: 1rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        justify-content: flex-start;
+    }
+
+    .time-end { margin-top: 0; }
+
+    .booking-status {
+        justify-content: flex-start;
+        padding-top: 0;
+    }
+}
+
+/* ============================================
+ТАБЫ И НОВЫЕ СТАТУСЫ
+============================================ */
+.master-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1rem;
+}
+
+.master-tabs .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.master-tabs .tab-btn:hover {
+    color: #fff;
+}
+
+.master-tabs .tab-btn.active {
+    color: var(--accent-color);
+}
+
+.master-tabs .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Статусы для визитов */
+.status-badge.pending { color: #ffc107; }
+.status-badge.confirmed { color: #007bff; }

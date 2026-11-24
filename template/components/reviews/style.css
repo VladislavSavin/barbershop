@@ -1,0 +1,422 @@
+/* ============================================
+КОМПОНЕНТ: ОТЗЫВЫ (СЛАЙДЕР + МОДАЛКА)
+Файл: template/components/reviews/style.css
+============================================ */
+
+/* --- 1. Общий блок --- */
+.reviews-block {
+    margin: 6rem 0;
+    overflow: hidden; /* Чтобы карточки не вылезали за края экрана */
+}
+
+.reviews-slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+}
+
+.reviews-slider-header .section-title {
+    font-size: 2.2rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.reviews-slider-header .section-subtitle {
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+/* Кнопки навигации слайдера */
+.slider-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.slider-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.slider-btn:hover {
+    background: var(--accent-color);
+    color: #000;
+    border-color: var(--accent-color);
+}
+
+/* --- 2. Слайдер --- */
+.reviews-slider-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.reviews-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem; /* Место для скроллбара */
+
+    /* Скрываем стандартный скроллбар */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.reviews-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- 3. Карточка отзыва --- */
+.review-card {
+    /* Ровно 3 карточки на десктопе. Вычитаем gap, чтобы влезло идеально */
+    flex: 0 0 calc((100% - 3rem) / 3);
+    scroll-snap-align: start;
+
+    background: var(--bg-surface);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s;
+}
+
+.review-card:hover {
+    border-color: rgba(200, 122, 78, 0.3);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.review-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.review-avatar {
+    width: 40px;
+    height: 40px;
+    background: rgba(200, 122, 78, 0.1);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.review-name {
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.review-stars {
+    font-size: 0.8rem;
+    display: flex;
+    gap: 2px;
+}
+
+.review-text {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    /* Ограничиваем длину текста, чтобы карточки были одинаковыми */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.review-date {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    display: block;
+    text-align: right;
+}
+
+/* --- 4. Кнопка "Оставить отзыв" --- */
+.reviews-action {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-open-review {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 1rem 3rem;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-open-review:hover {
+    background: var(--accent-color);
+    color: var(--bg-main);
+}
+
+.guest-hint {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.guest-hint a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ============================================
+5. КРАСИВОЕ МОДАЛЬНОЕ ОКНО ОТЗЫВА
+============================================ */
+.review-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.review-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Фон с сильным размытием */
+.review-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Сама карточка */
+.review-modal__content {
+    position: relative;
+    background: linear-gradient(145deg, #1a1a1a 0%, #111111 100%);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 24px;
+    border: 1px solid rgba(200, 122, 78, 0.2);
+    padding: 3rem 2.5rem;
+    z-index: 1;
+    box-shadow:
+            0 30px 60px rgba(0, 0, 0, 0.8),
+            0 0 20px rgba(200, 122, 78, 0.1);
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    margin: 1rem;
+}
+
+.review-modal.active .review-modal__content {
+    transform: translateY(0) scale(1);
+}
+
+/* Кнопка закрытия */
+.review-modal__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: var(--text-muted);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.review-modal__close:hover {
+    background: rgba(200, 122, 78, 0.2);
+    color: var(--accent-color);
+    transform: rotate(90deg);
+}
+
+/* Заголовки */
+.review-modal__title {
+    color: var(--text-main);
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.review-modal__subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Форма */
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* --- ИНТЕРАКТИВНЫЕ ЗВЕЗДОЧКИ --- */
+.rating-wrapper {
+    text-align: center;
+}
+
+.rating-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 8px;
+}
+
+.rating-input input {
+    display: none;
+}
+
+.rating-input label {
+    font-size: 2.5rem;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Эффект при наведении и выборе */
+.rating-input input:checked ~ label,
+.rating-input label:hover,
+.rating-input label:hover ~ label {
+    color: var(--accent-color);
+    text-shadow: 0 0 15px rgba(200, 122, 78, 0.5);
+    transform: scale(1.1);
+}
+
+/* --- ТЕКСТОВОЕ ПОЛЕ --- */
+.review-textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 120px;
+    background: #0a0a0a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    padding: 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.review-textarea::placeholder {
+    color: #555;
+}
+
+.review-textarea:focus {
+    outline: none;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 4px rgba(200, 122, 78, 0.1);
+    background: #111 !important;
+}
+
+/* --- КНОПКА ОТПРАВКИ --- */
+.review-form .btn-submit {
+    width: 100%;
+    padding: 1.2rem;
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(200, 122, 78, 0.2);
+}
+
+.review-form .btn-submit:hover {
+    background: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+}
+
+.review-form .btn-submit:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+6. АДАПТИВ
+============================================ */
+@media (max-width: 992px) {
+    .review-card {
+        flex: 0 0 calc((100% - 1.5rem) / 2); /* 2 карточки на планшетах */
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews-slider-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    /* Скрываем стрелки на мобилках, чтобы не мешали */
+    .slider-controls {
+        display: none;
+    }
+
+    .review-card {
+        /* Карточка занимает 100% ширины экрана */
+        flex: 0 0 100%;
+    }
+
+    .review-text {
+        /* Разрешаем тексту занимать больше строк на телефоне */
+        -webkit-line-clamp: 6;
+    }
+
+    .reviews-block {
+        margin: 3rem 0;
+    }
+}

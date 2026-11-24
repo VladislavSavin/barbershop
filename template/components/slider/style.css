@@ -1,0 +1,164 @@
+/* ============================================
+КОМПОНЕНТ: СЛАЙДЕР (ГАРМОШКА НА FLEXBOX)
+============================================ */
+
+.slider-block {
+    margin: 4rem 0;
+}
+
+.slider-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Контейнер для всех карточек */
+.accordion-gallery {
+    display: flex; /* Выстраиваем в ряд */
+    gap: 15px; /* Отступы между карточками */
+    height: 500px; /* Фиксированная высота всего блока */
+    width: 100%;
+}
+
+/* Обычная (ужатая) карточка */
+.accordion-card {
+    flex: 1; /* Занимает 1 часть пространства */
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #111;
+    cursor: pointer;
+    opacity: 0.4; /* Затемнена */
+
+    /* Добавляем тонкую медную рамку */
+    border: 2px solid rgba(200, 122, 78, 0.3);
+    /* Чтобы рамка не увеличивала размер карточки */
+    box-sizing: border-box;
+
+    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.5s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Наведение на карточку */
+.accordion-card:hover {
+    border-color: var(--accent-color);
+}
+
+/* Активная (выбранная) карточка */
+.accordion-card.active {
+    flex: 5; /* Занимает в 5 раз больше места, чем обычная */
+    opacity: 1; /* Полная яркость */
+    cursor: default;
+
+    /* Яркая рамка и легкое свечение для активной карточки */
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(200, 122, 78, 0.3);
+}
+
+/* Картинки */
+.accordion-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняет блок, обрезая края */
+    pointer-events: none;
+}
+
+/* Затемнение для неактивных карточек */
+.accordion-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    transition: opacity 0.4s ease;
+}
+
+.accordion-card.active::after {
+    opacity: 0; /* Убираем затемнение с активной */
+}
+
+/* Оверлей с текстом */
+.accordion-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%);
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.accordion-card.active .accordion-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-category {
+    color: var(--accent-color);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.slide-title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+/* ============================================
+АДАПТИВ ДЛЯ СЛАЙДЕРА РАБОТ
+============================================ */
+@media (max-width: 768px) {
+    .accordion-gallery {
+        /* Включаем горизонтальный скролл */
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: 400px; /* Фиксированная высота */
+        gap: 15px;
+    }
+
+    .accordion-card {
+        /* Фиксируем ширину каждой карточки (85% экрана) */
+        flex: 0 0 85% !important;
+        scroll-snap-align: start;
+        opacity: 1 !important; /* Делаем все карточки яркими */
+    }
+
+    .accordion-card.active {
+        /* Отключаем расширение, которое было на ПК */
+        flex: 0 0 85% !important;
+    }
+
+    /* Фиксируем картинку, чтобы она не сплющивалась */
+    .accordion-card img {
+        width: 100% !important;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Текст всегда виден */
+    .accordion-overlay {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        padding: 1.5rem 1rem;
+    }
+
+    .slide-title {
+        font-size: 1.4rem;
+    }
+
+    .slide-desc {
+        font-size: 0.85rem;
+    }
+}
